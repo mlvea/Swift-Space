@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from localhost:2368/lets-iterate-an-swift-array-while-filtering-nil-elements/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Jun 2016 08:09:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Lets iterate an swift array with skipping nil elements.</title>
+    <meta name="description" content="Iterate an swift array skipping nil elements with swift pattern matching power." />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/prisme87e.css?v=09db91972c" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/screene87e.css?v=09db91972c" />
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+
+    <link rel="canonical" href="index.html" />
+    <meta name="referrer" content="origin" />
+    
+    <meta property="og:site_name" content="Swift" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Lets iterate an swift array with skipping nil elements." />
+    <meta property="og:description" content="Iterate an swift array skipping nil elements with swift pattern matching power." />
+    <meta property="og:url" content="index.html" />
+    <meta property="article:published_time" content="2016-06-26T07:23:12.593Z" />
+    <meta property="article:modified_time" content="2016-06-26T07:47:16.848Z" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Lets iterate an swift array with skipping nil elements." />
+    <meta name="twitter:description" content="Iterate an swift array skipping nil elements with swift pattern matching power." />
+    <meta name="twitter:url" content="index.html" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Madushan" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Swift",
+        "logo": "http://localhost:2368/ghost/img/ghosticon.jpg"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Madushan",
+        "url": "http://localhost:2368/author/madushan/",
+        "sameAs": []
+    },
+    "headline": "Lets iterate an swift array with skipping nil elements.",
+    "url": "http://localhost:2368/lets-iterate-an-swift-array-while-filtering-nil-elements/",
+    "datePublished": "2016-06-26T07:23:12.593Z",
+    "dateModified": "2016-06-26T07:47:16.848Z",
+    "description": "Iterate an swift array skipping nil elements with swift pattern matching power."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.8" />
+    <link rel="alternate" type="application/rss+xml" title="Swift" href="../rss/index.html" />
+</head>
+<body class="post-template nav-closed">
+
+    <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+            <li class="nav-home" role="presentation"><a href="../index.html">Home</a></li>
+    </ul>
+        <a class="subscribe-button icon-feed" href="../rss/index.html">Subscribe</a>
+</div>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        
+            <a class="menu-button icon-menu" href="#"><span class="word">Menu</span></a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">Lets iterate an swift array while filtering nil elements.</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2016-06-26">26 June 2016</time> 
+            </section>
+        </header>
+
+        <section class="post-content">
+            <h2 id="anotherpatternmatchingusage">Another Pattern Matching Usage</h2>
+
+<p>Swift <code>Pattern Matching</code> is great. Which enables ton of possibilities which would have ended up in nested branches in <code>ObjectiveC</code></p>
+
+<p>Here is a very simple example of how to iterating an array skipping nil elements in swift.</p>
+
+<pre><code class="language-swift">let arrayOfOptionalInts: [Int?] = [nil, 2, 3, nil, 5]  
+// Match only non-nil values
+for case let number? in arrayOfOptionalInts{  
+    print("Found a Int : \(number)")
+}
+</code></pre>
+
+<p>So as you can see this is possible thanks to power of pattern matching. Without such power it would have been something like.</p>
+
+<pre><code class="language-swift">for element in arrayOfOptionalInts{  
+    if let int = element{
+        print("Foun a Int: \(int)")
+    }
+}
+</code></pre>
+
+<p>It can be even this.</p>
+
+<pre><code class="language-swift">let arrayOfTuples: [(Int?,Int?)] = [(nil,1),(1,3),(nil,nil)]
+
+for case let (x?,y?) in arrayOfTuples{  
+    print("Found non nil (Int,Int) Tuple: (\(x),\(y))")
+}
+</code></pre>
+        </section>
+
+        <footer class="post-footer">
+
+
+
+            <section class="author">
+                <h4><a href="../author/madushan/index.html">Madushan</a></h4>
+
+                    <p>Read <a href="../author/madushan/index.html">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Lets%20iterate%20an%20swift%20array%20while%20filtering%20nil%20elements.&amp;url=http://localhost:2368/lets-iterate-an-swift-array-while-filtering-nil-elements/"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/lets-iterate-an-swift-array-while-filtering-nil-elements/"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://localhost:2368/lets-iterate-an-swift-array-while-filtering-nil-elements/"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+
+        </footer>
+
+    </article>
+</main>
+
+<aside class="read-next">
+    <a class="read-next-story no-cover" href="../swift-tuple-and-types/index.html">
+        <section class="post">
+            <h2>Swift Tuple and Types</h2>
+            <p>Tuple made it into headlines when the swift was announced. Functions got the ability can return multiple values with&hellip;</p>
+        </section>
+    </a>
+    <a class="read-next-story prev no-cover" href="../welcome-to-ghost/index.html">
+        <section class="post">
+            <h2>Welcome to Ghost</h2>
+            <p>You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you&hellip;</p>
+        </section>
+    </a>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <section class="copyright"><a href="../index.html">Swift</a> &copy; 2016</section>
+            <section class="poweredby">Proudly published with <a href="https://ghost.org/">Ghost</a></section>
+        </footer>
+
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    
+    <script type="text/javascript" src="../assets/js/jquery.fitvidse87e.js?v=09db91972c"></script>
+    <script type="text/javascript" src="../assets/js/indexe87e.js?v=09db91972c"></script>
+    <script type="text/javascript" src="../assets/js/prisme87e.js?v=09db91972c"></script>
+</body>
+
+<!-- Mirrored from localhost:2368/lets-iterate-an-swift-array-while-filtering-nil-elements/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Jun 2016 08:09:27 GMT -->
+</html>

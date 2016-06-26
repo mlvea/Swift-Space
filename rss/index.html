@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title><![CDATA[Swift]]></title><description><![CDATA[Nothing but Swift. 🎉⛩🦄]]></description><link>http://localhost:2368/</link><generator>Ghost 0.8</generator><lastBuildDate>Sun, 26 Jun 2016 08:09:26 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Swift Tuple and Types]]></title><description><![CDATA[<p>Tuple made it into headlines when the swift was announced. Functions got the ability can return multiple values with help of tuples. What is this tuple. <br>
+We will look how tuples fit into Swift type system.</p>
+
+<p>Swift type system divided into 2 categories.</p>
+
+<ul>
+<li>names types - Types that given a</li></ul>]]></description><link>http://localhost:2368/swift-tuple-and-types/</link><guid isPermaLink="false">c3659911-6d9c-43ab-a3c3-102128921690</guid><dc:creator><![CDATA[Madushan]]></dc:creator><pubDate>Sun, 26 Jun 2016 07:51:09 GMT</pubDate><content:encoded><![CDATA[<p>Tuple made it into headlines when the swift was announced. Functions got the ability can return multiple values with help of tuples. What is this tuple. <br>
+We will look how tuples fit into Swift type system.</p>
+
+<p>Swift type system divided into 2 categories.</p>
+
+<ul>
+<li>names types - Types that given a name when defined.</li>
+<li>compound types - Simply type without names.</li>
+</ul>
+
+<p>Tuple is a compound type. For example</p>
+
+<pre><code class="language-swift">(Int, Int)
+</code></pre>
+
+<p>Tuple is list of comma separated values, which enclose in parentheses. Tuple can also be contained with zero values. </p>
+
+<pre><code class="language-swift    ">()
+</code></pre>
+
+<p>This is an Empty Tuple. <code>Void</code> is a <code>typealias</code> for empty tuple. <br>
+Well that is this <code>typealias</code>. </p>
+
+<h1 id="whatistypealias">What is typealias</h1>
+
+<p>Type Alias is a given type name for existing named or compound type in swift. <br>
+After defined alias name can be used instead of existing named or compound type.</p>
+
+<pre><code class="language-swift">typealias Point = (Int, Int)  
+</code></pre>
+
+<p>In above example <code>Point</code> becomes a aliased type for existing tuple type of <code>(Int, Int)</code>. This is very handy for compound types like tuples.</p>
+
+<h1 id="functionswithmultiplereturnvalues">Functions with Multiple Return Values</h1>
+
+<p>Lets look at an example of function returning multiple values thanks to Tuples.</p>
+
+<pre><code class="language-swift">func getTime() -&gt; (Int, Int, Int) {
+
+    //Calculating Date components. 
+    let date = NSDate()
+    let calendar = NSCalendar.currentCalendar()
+    let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond, fromDate: date)
+    let hours = components.hour
+    let minutes = components.minute
+    let seconds = components.second
+
+    return ( hours, minutes, seconds)
+}
+</code></pre>
+
+<p>If you don't understand calculating dates components. Just focus on how to tuple to return multiple values of Hour, Minutes and Seconds. <br>
+If you call</p>
+
+<pre><code class="language-swift">let time = getTime()  
+</code></pre>
+
+<p>Returns - <code>(.0 18, .1 17, .2 50)</code>. <br>
+Values will be different for you as you call this on a different date. <br>
+Individual member values of the tuple can be accessed using,</p>
+
+<pre><code class="language-swift">time.0  
+time.1  
+time.2  
+</code></pre>
+
+<p>Member are named using there index of appearance.  What if we want more proper name for elements. <br>
+Tuple member values can be named as part of function return type.</p>
+
+<pre><code class="language-swift">func getTime() -&gt; (hours: Int, minutes:  Int, seconds: Int) {  
+    ...
+    return ( hours, minutes, seconds)
+}
+</code></pre>
+
+<p>Now the tuple named members can be accessed as follows.</p>
+
+<pre><code class="language-swift">let time = getTime()  
+time.hours  
+time.minutes  
+time.hours  
+</code></pre>]]></content:encoded></item><item><title><![CDATA[Lets iterate an swift array while filtering nil elements.]]></title><description><![CDATA[Iterate an swift array skipping nil elements with swift pattern matching power.]]></description><link>http://localhost:2368/lets-iterate-an-swift-array-while-filtering-nil-elements/</link><guid isPermaLink="false">6f0542ef-bcf1-4cb0-b956-3078135d93ca</guid><dc:creator><![CDATA[Madushan]]></dc:creator><pubDate>Sun, 26 Jun 2016 07:23:12 GMT</pubDate><content:encoded><![CDATA[<h2 id="anotherpatternmatchingusage">Another Pattern Matching Usage</h2>
+
+<p>Swift <code>Pattern Matching</code> is great. Which enables ton of possibilities which would have ended up in nested branches in <code>ObjectiveC</code></p>
+
+<p>Here is a very simple example of how to iterating an array skipping nil elements in swift.</p>
+
+<pre><code class="language-swift">let arrayOfOptionalInts: [Int?] = [nil, 2, 3, nil, 5]  
+// Match only non-nil values
+for case let number? in arrayOfOptionalInts{  
+    print("Found a Int : \(number)")
+}
+</code></pre>
+
+<p>So as you can see this is possible thanks to power of pattern matching. Without such power it would have been something like.</p>
+
+<pre><code class="language-swift">for element in arrayOfOptionalInts{  
+    if let int = element{
+        print("Foun a Int: \(int)")
+    }
+}
+</code></pre>
+
+<p>It can be even this.</p>
+
+<pre><code class="language-swift">let arrayOfTuples: [(Int?,Int?)] = [(nil,1),(1,3),(nil,nil)]
+
+for case let (x?,y?) in arrayOfTuples{  
+    print("Found non nil (Int,Int) Tuple: (\(x),\(y))")
+}
+</code></pre>]]></content:encoded></item><item><title><![CDATA[Welcome to Ghost]]></title><description><![CDATA[<p>You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at <code>&lt;your blog URL&gt;/ghost/</code>. When you arrive, you can select this post from a list</p>]]></description><link>http://localhost:2368/welcome-to-ghost/</link><guid isPermaLink="false">c2eb64db-8f95-429a-93b3-36d8bbac3cfc</guid><category><![CDATA[Getting Started]]></category><dc:creator><![CDATA[Madushan]]></dc:creator><pubDate>Thu, 23 Jun 2016 18:00:51 GMT</pubDate><content:encoded><![CDATA[<p>You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at <code>&lt;your blog URL&gt;/ghost/</code>. When you arrive, you can select this post from a list on the left and see a preview of it on the right. Click the little pencil icon at the top of the preview to edit this post and read the next section!</p>
+
+<h2 id="gettingstarted">Getting Started</h2>
+
+<p>Ghost uses something called Markdown for writing. Essentially, it's a shorthand way to manage your post formatting as you write!</p>
+
+<p>Writing in Markdown is really easy. In the left hand panel of Ghost, you simply write as you normally would. Where appropriate, you can use <em>shortcuts</em> to <strong>style</strong> your content. For example, a list:</p>
+
+<ul>
+<li>Item number one</li>
+<li>Item number two
+<ul><li>A nested item</li></ul></li>
+<li>A final item</li>
+</ul>
+
+<p>or with numbers!</p>
+
+<ol>
+<li>Remember to buy some milk  </li>
+<li>Drink the milk  </li>
+<li>Tweet that I remembered to buy the milk, and drank it</li>
+</ol>
+
+<h3 id="links">Links</h3>
+
+<p>Want to link to a source? No problem. If you paste in a URL, like <a href="http://ghost.org">http://ghost.org</a> - it'll automatically be linked up. But if you want to customise your anchor text, you can do that too! Here's a link to <a href="http://ghost.org">the Ghost website</a>. Neat.</p>
+
+<h3 id="whataboutimages">What about Images?</h3>
+
+<p>Images work too! Already know the URL of the image you want to include in your article? Simply paste it in like this to make it show up:</p>
+
+<p><img src="https://ghost.org/images/ghost.png" alt="The Ghost Logo"></p>
+
+<p>Not sure which image you want to use yet? That's ok too. Leave yourself a descriptive placeholder and keep writing. Come back later and drag and drop the image in to upload:</p>
+
+<h3 id="quoting">Quoting</h3>
+
+<p>Sometimes a link isn't enough, you want to quote someone on what they've said. Perhaps you've started using a new blogging platform and feel the sudden urge to share their slogan? A quote might be just the way to do it!</p>
+
+<blockquote>
+  <p>Ghost - Just a blogging platform</p>
+</blockquote>
+
+<h3 id="workingwithcode">Working with Code</h3>
+
+<p>Got a streak of geek? We've got you covered there, too. You can write inline <code>&lt;code&gt;</code> blocks really easily with back ticks. Want to show off something more comprehensive? 4 spaces of indentation gets you there.</p>
+
+<pre><code>.awesome-thing {
+    display: block;
+    width: 100%;
+}
+</code></pre>
+
+<h3 id="readyforabreak">Ready for a Break?</h3>
+
+<p>Throw 3 or more dashes down on any new line and you've got yourself a fancy new divider. Aw yeah.</p>
+
+<hr>
+
+<h3 id="advancedusage">Advanced Usage</h3>
+
+<p>There's one fantastic secret about Markdown. If you want, you can write plain old HTML and it'll still work! Very flexible.</p>
+
+<p><input type="text" placeholder="I'm an input field!"></p>
+
+<p>That should be enough to get you started. Have fun - and let us know what you think :)</p>]]></content:encoded></item></channel></rss>
