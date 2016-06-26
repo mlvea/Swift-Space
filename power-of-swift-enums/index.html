@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from localhost:2368/power-of-swift-enums/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Jun 2016 09:23:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Power of Swift Enums - 01</title>
+    <meta name="description" content="" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/prisme87e.css?v=09db91972c" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/screene87e.css?v=09db91972c" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+
+    <link rel="canonical" href="index.html" />
+    <meta name="referrer" content="origin" />
+    
+    <meta property="og:site_name" content="Swift" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Power of Swift Enums - 01" />
+    <meta property="og:description" content="Enumerations in swift are much more flexible than enums in many other programming languages. The highlights of Swift enums are, You do not have to provide a value for each member of the enumeration. If a value is provided it can be a string, a character, or a value of" />
+    <meta property="og:url" content="index.html" />
+    <meta property="article:published_time" content="2016-06-26T09:18:21.449Z" />
+    <meta property="article:modified_time" content="2016-06-26T09:19:06.481Z" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Power of Swift Enums - 01" />
+    <meta name="twitter:description" content="Enumerations in swift are much more flexible than enums in many other programming languages. The highlights of Swift enums are, You do not have to provide a value for each member of the enumeration. If a value is provided it can be a string, a character, or a value of" />
+    <meta name="twitter:url" content="index.html" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Madushan" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Swift",
+        "logo": "https://swift.madnik.space/ghost/img/ghosticon.jpg"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Madushan",
+        "url": "https://swift.madnik.space/author/madushan/",
+        "sameAs": []
+    },
+    "headline": "Power of Swift Enums - 01",
+    "url": "https://swift.madnik.space/power-of-swift-enums/",
+    "datePublished": "2016-06-26T09:18:21.449Z",
+    "dateModified": "2016-06-26T09:19:06.481Z",
+    "description": "Enumerations in swift are much more flexible than enums in many other programming languages. The highlights of Swift enums are, You do not have to provide a value for each member of the enumeration. If a value is provided it can be a string, a character, or a value of"
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.8" />
+    <link rel="alternate" type="application/rss+xml" title="Swift" href="../rss/index.html" />
+</head>
+<body class="post-template nav-closed">
+
+    <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+            <li class="nav-home" role="presentation"><a href="../index.html">Home</a></li>
+    </ul>
+        <a class="subscribe-button icon-feed" href="../rss/index.html">Subscribe</a>
+</div>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        
+            <a class="menu-button icon-menu" href="#"><span class="word">Menu</span></a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">Power of Swift Enums - 01</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2016-06-26">26 June 2016</time> 
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>Enumerations in swift are much more flexible than enums in many other programming languages. The highlights of Swift enums are,</p>
+
+<ul>
+<li>You do not have to provide a value for each member of the enumeration.</li>
+<li>If a value is provided it can be a string, a character, or a value of any integer or floating-point type.</li>
+<li>Members can specify associated value of any type to store along with the member value.</li>
+</ul>
+
+<p>Enumeration syntax</p>
+
+<pre><code class="language-swift">enum SwiftEnumeration {  
+    //enumeration definition goes here
+}
+</code></pre>
+
+<p>Example</p>
+
+<pre><code class="language-swift">enum Gender {  
+    case Male
+    case Female
+}
+</code></pre>
+
+<p>Unlike ObjectiveC, <code>Male</code>, <code>Female</code> does not implicitly equal to 0,1. Instead they are values in their own right, with an explicitly defined type of <strong>Gender</strong>.</p>
+
+<blockquote>
+  <p>Convention: Enumeration names should start with a capital letter. Give enumeration types singular name.</p>
+</blockquote>
+
+<p>Members can be defined in a single line using comma separated values.</p>
+
+<pre><code class="language-swift">enum Planet {  
+    case Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune
+}
+</code></pre>
+
+<p><strong>[Snippet and Explain]</strong></p>
+
+<pre><code class="language-swift">var gender = Gender.Male
+
+//Once assigned we can use short hand syntax
+gender = .Female  
+</code></pre>
+
+<p>The type of <code>gender</code> is inferred to be <code>Gender</code> once initialized with one of the possible values. There after you can use short hand syntax. Type is not necessary.</p>
+
+<h3 id="associatedvalues">Associated Values</h3>
+
+<p>Swift Enumerations can store associated values of other types alongside with member values. </p>
+
+<pre><code class="language-swift">enum Cipher {  
+    case md5(NSString)
+    case sha1(NSString)
+}
+</code></pre>
+
+<p>Above code defines a enumeration type called Cipher which can take either a value of Hash of Sha1 with an associated value of type <code>NSString</code>. <br />
+The definition doesn't initialize any NSString value. It just defines type of associated value to use with Cipher.</p>
+
+<p>Lets create a Hash Cipher.</p>
+
+<pre><code class="language-swift">var hashcipher = Cipher.md5(""8743b52063cd84097a65d1633f5c74f5"")  
+</code></pre>
+
+<h3 id="rawvalues">Raw Values</h3>
+
+<p>As an alternative to associated values enumeration member can come pre-populated defaults values. Those are called raw values and have to of same type. <br />
+Lets consider the example in official swift documentation.</p>
+
+<pre><code class="language-swift">enum ASCIIControlCharacter: Character {  
+    case Tab = ""\t""
+    case LineFeed = ""\n""
+    case CarriageReturn = ""\r""
+}
+</code></pre>
+
+<p>Here raw values of the enumeration called <code>ASCIIControlCharacter</code> are defined to be of type <code>Character</code>. Here are some rules applicable for raw values.</p>
+
+<ul>
+<li>Raw value of particular enumeration member have to always same. Unlike associated values.</li>
+<li>Each ray value must be unique within enumeration declaration.</li>
+<li>Raw value can be of type String, Character, or any of integer, floating-point number types."</li>
+</ul>
+        </section>
+
+        <footer class="post-footer">
+
+
+
+            <section class="author">
+                <h4><a href="../author/madushan/index.html">Madushan</a></h4>
+
+                    <p>Read <a href="../author/madushan/index.html">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Power%20of%20Swift%20Enums%20-%2001&amp;url=https://swift.madnik.space/power-of-swift-enums/"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://swift.madnik.space/power-of-swift-enums/"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://swift.madnik.space/power-of-swift-enums/"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+
+        </footer>
+
+    </article>
+</main>
+
+<aside class="read-next">
+    <a class="read-next-story no-cover" href="../power-of-enums-in-swift-think/index.html">
+        <section class="post">
+            <h2>Power of Enums in Swift:  Think</h2>
+            <p>Check weather you digest the reasons for following enumerations become valid or invalid.&hellip;</p>
+        </section>
+    </a>
+    <a class="read-next-story prev no-cover" href="../swift-tuple-and-types/index.html">
+        <section class="post">
+            <h2>Swift Tuple and Types</h2>
+            <p>Tuple made it into headlines when the swift was announced. Functions got the ability can return multiple values with&hellip;</p>
+        </section>
+    </a>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <section class="copyright"><a href="../index.html">Swift</a> &copy; 2016</section>
+            <section class="poweredby">Proudly published with <a href="https://ghost.org/">Ghost</a></section>
+        </footer>
+
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    
+    <script type="text/javascript" src="../assets/js/jquery.fitvidse87e.js?v=09db91972c"></script>
+    <script type="text/javascript" src="../assets/js/indexe87e.js?v=09db91972c"></script>
+    <script type="text/javascript" src="../assets/js/prisme87e.js?v=09db91972c"></script>
+</body>
+
+<!-- Mirrored from localhost:2368/power-of-swift-enums/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Jun 2016 09:23:04 GMT -->
+</html>

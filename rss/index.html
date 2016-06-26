@@ -1,4 +1,94 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="https://purl.org/dc/elements/1.1/" xmlns:content="https://purl.org/rss/1.0/modules/content/" xmlns:atom="https://www.w3.org/2005/Atom" version="2.0" xmlns:media="https://search.yahoo.com/mrss/"><channel><title><![CDATA[Swift]]></title><description><![CDATA[Nothing but Swift. 🎉⛩🦄]]></description><link>https://swift.madnik.space/</link><generator>Ghost 0.8</generator><lastBuildDate>Sun, 26 Jun 2016 08:09:26 GMT</lastBuildDate><atom:link href="https://swift.madnik.space/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Swift Tuple and Types]]></title><description><![CDATA[<p>Tuple made it into headlines when the swift was announced. Functions got the ability can return multiple values with help of tuples. What is this tuple. <br>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="https://purl.org/dc/elements/1.1/" xmlns:content="https://purl.org/rss/1.0/modules/content/" xmlns:atom="https://www.w3.org/2005/Atom" version="2.0" xmlns:media="https://search.yahoo.com/mrss/"><channel><title><![CDATA[Swift]]></title><description><![CDATA[Nothing but Swift. 🎉⛩🦄]]></description><link>https://swift.madnik.space/</link><generator>Ghost 0.8</generator><lastBuildDate>Sun, 26 Jun 2016 09:23:03 GMT</lastBuildDate><atom:link href="https://swift.madnik.space/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Power of Enums in Swift:  Think]]></title><description><![CDATA[<p>Check weather you digest the reasons for following enumerations become valid or invalid.</p>
+
+<script src="https://swift.madnik.space/power-of-enums-in-swift-think/" https:="" gist.github.com="" madnik="" 143e19f4509772ae418f.js""=""></script>]]></description><link>https://swift.madnik.space/power-of-enums-in-swift-think/</link><guid isPermaLink="false">aa24ea64-6e2f-4d0a-9b16-c4321e315ff8</guid><dc:creator><![CDATA[Madushan]]></dc:creator><pubDate>Sun, 26 Jun 2016 09:20:13 GMT</pubDate><content:encoded><![CDATA[<p>Check weather you digest the reasons for following enumerations become valid or invalid.</p>
+
+<script src="https://swift.madnik.space/power-of-enums-in-swift-think/" https:="" gist.github.com="" madnik="" 143e19f4509772ae418f.js""=""></script>]]></content:encoded></item><item><title><![CDATA[Power of Swift Enums - 01]]></title><description><![CDATA[<p>Enumerations in swift are much more flexible than enums in many other programming languages. The highlights of Swift enums are,</p>
+
+<ul>
+<li>You do not have to provide a value for each member of the enumeration.</li>
+<li>If a value is provided it can be a string, a character, or a value of</li></ul>]]></description><link>https://swift.madnik.space/power-of-swift-enums/</link><guid isPermaLink="false">7332195d-9112-43b0-b09a-0a0b4d581fd1</guid><dc:creator><![CDATA[Madushan]]></dc:creator><pubDate>Sun, 26 Jun 2016 09:18:21 GMT</pubDate><content:encoded><![CDATA[<p>Enumerations in swift are much more flexible than enums in many other programming languages. The highlights of Swift enums are,</p>
+
+<ul>
+<li>You do not have to provide a value for each member of the enumeration.</li>
+<li>If a value is provided it can be a string, a character, or a value of any integer or floating-point type.</li>
+<li>Members can specify associated value of any type to store along with the member value.</li>
+</ul>
+
+<p>Enumeration syntax</p>
+
+<pre><code class="language-swift">enum SwiftEnumeration {  
+    //enumeration definition goes here
+}
+</code></pre>
+
+<p>Example</p>
+
+<pre><code class="language-swift">enum Gender {  
+    case Male
+    case Female
+}
+</code></pre>
+
+<p>Unlike ObjectiveC, <code>Male</code>, <code>Female</code> does not implicitly equal to 0,1. Instead they are values in their own right, with an explicitly defined type of <strong>Gender</strong>.</p>
+
+<blockquote>
+  <p>Convention: Enumeration names should start with a capital letter. Give enumeration types singular name.</p>
+</blockquote>
+
+<p>Members can be defined in a single line using comma separated values.</p>
+
+<pre><code class="language-swift">enum Planet {  
+    case Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune
+}
+</code></pre>
+
+<p><strong>[Snippet and Explain]</strong></p>
+
+<pre><code class="language-swift">var gender = Gender.Male
+
+//Once assigned we can use short hand syntax
+gender = .Female  
+</code></pre>
+
+<p>The type of <code>gender</code> is inferred to be <code>Gender</code> once initialized with one of the possible values. There after you can use short hand syntax. Type is not necessary.</p>
+
+<h3 id="associatedvalues">Associated Values</h3>
+
+<p>Swift Enumerations can store associated values of other types alongside with member values. </p>
+
+<pre><code class="language-swift">enum Cipher {  
+    case md5(NSString)
+    case sha1(NSString)
+}
+</code></pre>
+
+<p>Above code defines a enumeration type called Cipher which can take either a value of Hash of Sha1 with an associated value of type <code>NSString</code>. <br>
+The definition doesn't initialize any NSString value. It just defines type of associated value to use with Cipher.</p>
+
+<p>Lets create a Hash Cipher.</p>
+
+<pre><code class="language-swift">var hashcipher = Cipher.md5(""8743b52063cd84097a65d1633f5c74f5"")  
+</code></pre>
+
+<h3 id="rawvalues">Raw Values</h3>
+
+<p>As an alternative to associated values enumeration member can come pre-populated defaults values. Those are called raw values and have to of same type. <br>
+Lets consider the example in official swift documentation.</p>
+
+<pre><code class="language-swift">enum ASCIIControlCharacter: Character {  
+    case Tab = ""\t""
+    case LineFeed = ""\n""
+    case CarriageReturn = ""\r""
+}
+</code></pre>
+
+<p>Here raw values of the enumeration called <code>ASCIIControlCharacter</code> are defined to be of type <code>Character</code>. Here are some rules applicable for raw values.</p>
+
+<ul>
+<li>Raw value of particular enumeration member have to always same. Unlike associated values.</li>
+<li>Each ray value must be unique within enumeration declaration.</li>
+<li>Raw value can be of type String, Character, or any of integer, floating-point number types."</li>
+</ul>]]></content:encoded></item><item><title><![CDATA[Swift Tuple and Types]]></title><description><![CDATA[<p>Tuple made it into headlines when the swift was announced. Functions got the ability can return multiple values with help of tuples. What is this tuple. <br>
 We will look how tuples fit into Swift type system.</p>
 
 <p>Swift type system divided into 2 categories.</p>
@@ -114,69 +204,4 @@ for case let number? in arrayOfOptionalInts{
 for case let (x?,y?) in arrayOfTuples{  
     print("Found non nil (Int,Int) Tuple: (\(x),\(y))")
 }
-</code></pre>]]></content:encoded></item><item><title><![CDATA[Welcome to Ghost]]></title><description><![CDATA[<p>You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at <code>&lt;your blog URL&gt;/ghost/</code>. When you arrive, you can select this post from a list</p>]]></description><link>https://swift.madnik.space/welcome-to-ghost/</link><guid isPermaLink="false">c2eb64db-8f95-429a-93b3-36d8bbac3cfc</guid><category><![CDATA[Getting Started]]></category><dc:creator><![CDATA[Madushan]]></dc:creator><pubDate>Thu, 23 Jun 2016 18:00:51 GMT</pubDate><content:encoded><![CDATA[<p>You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at <code>&lt;your blog URL&gt;/ghost/</code>. When you arrive, you can select this post from a list on the left and see a preview of it on the right. Click the little pencil icon at the top of the preview to edit this post and read the next section!</p>
-
-<h2 id="gettingstarted">Getting Started</h2>
-
-<p>Ghost uses something called Markdown for writing. Essentially, it's a shorthand way to manage your post formatting as you write!</p>
-
-<p>Writing in Markdown is really easy. In the left hand panel of Ghost, you simply write as you normally would. Where appropriate, you can use <em>shortcuts</em> to <strong>style</strong> your content. For example, a list:</p>
-
-<ul>
-<li>Item number one</li>
-<li>Item number two
-<ul><li>A nested item</li></ul></li>
-<li>A final item</li>
-</ul>
-
-<p>or with numbers!</p>
-
-<ol>
-<li>Remember to buy some milk  </li>
-<li>Drink the milk  </li>
-<li>Tweet that I remembered to buy the milk, and drank it</li>
-</ol>
-
-<h3 id="links">Links</h3>
-
-<p>Want to link to a source? No problem. If you paste in a URL, like <a href="https://ghost.org">https://ghost.org</a> - it'll automatically be linked up. But if you want to customise your anchor text, you can do that too! Here's a link to <a href="https://ghost.org">the Ghost website</a>. Neat.</p>
-
-<h3 id="whataboutimages">What about Images?</h3>
-
-<p>Images work too! Already know the URL of the image you want to include in your article? Simply paste it in like this to make it show up:</p>
-
-<p><img src="https://ghost.org/images/ghost.png" alt="The Ghost Logo"></p>
-
-<p>Not sure which image you want to use yet? That's ok too. Leave yourself a descriptive placeholder and keep writing. Come back later and drag and drop the image in to upload:</p>
-
-<h3 id="quoting">Quoting</h3>
-
-<p>Sometimes a link isn't enough, you want to quote someone on what they've said. Perhaps you've started using a new blogging platform and feel the sudden urge to share their slogan? A quote might be just the way to do it!</p>
-
-<blockquote>
-  <p>Ghost - Just a blogging platform</p>
-</blockquote>
-
-<h3 id="workingwithcode">Working with Code</h3>
-
-<p>Got a streak of geek? We've got you covered there, too. You can write inline <code>&lt;code&gt;</code> blocks really easily with back ticks. Want to show off something more comprehensive? 4 spaces of indentation gets you there.</p>
-
-<pre><code>.awesome-thing {
-    display: block;
-    width: 100%;
-}
-</code></pre>
-
-<h3 id="readyforabreak">Ready for a Break?</h3>
-
-<p>Throw 3 or more dashes down on any new line and you've got yourself a fancy new divider. Aw yeah.</p>
-
-<hr>
-
-<h3 id="advancedusage">Advanced Usage</h3>
-
-<p>There's one fantastic secret about Markdown. If you want, you can write plain old HTML and it'll still work! Very flexible.</p>
-
-<p><input type="text" placeholder="I'm an input field!"></p>
-
-<p>That should be enough to get you started. Have fun - and let us know what you think :)</p>]]></content:encoded></item></channel></rss>
+</code></pre>]]></content:encoded></item></channel></rss>
