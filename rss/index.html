@@ -1,4 +1,69 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="https://purl.org/dc/elements/1.1/" xmlns:content="https://purl.org/rss/1.0/modules/content/" xmlns:atom="https://www.w3.org/2005/Atom" version="2.0" xmlns:media="https://search.yahoo.com/mrss/"><channel><title><![CDATA[Untitled RSS Feed]]></title><description><![CDATA[Untitled RSS Feed]]></description><link>https://swift.madnik.space/</link><generator>Ghost 0.8</generator><lastBuildDate>Sun, 26 Jun 2016 10:32:11 GMT</lastBuildDate><atom:link href="https://swift.madnik.space/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Some questions about Enums . ??]]></title><description><![CDATA[<p>Check weather you digest the reasons for following enumerations become valid or invalid.</p>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="https://purl.org/dc/elements/1.1/" xmlns:content="https://purl.org/rss/1.0/modules/content/" xmlns:atom="https://www.w3.org/2005/Atom" version="2.0" xmlns:media="https://search.yahoo.com/mrss/"><channel><title><![CDATA[Untitled RSS Feed]]></title><description><![CDATA[Swift
+
+
+The programming language]]></description><link>https://swift.madnik.space/</link><generator>Ghost 0.8</generator><lastBuildDate>Wed, 29 Jun 2016 01:37:57 GMT</lastBuildDate><atom:link href="https://swift.madnik.space/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[I'm Swift function. I have many faces - Default parameter values]]></title><description><![CDATA[<h2 id="defaultparametervalues">Default Parameter Values</h2>
+
+<p>Swift functions can have default parameter values. This is done by assigning a parameter value after the type.</p>
+
+<pre><code class="language-swift">func show(animated: Bool = true){  
+    if (animated){
+        //Animation Code
+    }
+} 
+</code></pre>
+
+<p>The best piece is you can omit parameters with default values in function call. Cool.</p>
+
+<pre><code class="language-swift">show() //Same as show(true)</code></pre>]]></description><link>https://swift.madnik.space/im-swift-function-i-have-many-faces-2/</link><guid isPermaLink="false">3c196be4-42e5-496d-a8bc-a7620abeb5ec</guid><dc:creator><![CDATA[Madushan]]></dc:creator><pubDate>Tue, 28 Jun 2016 11:02:19 GMT</pubDate><content:encoded><![CDATA[<h2 id="defaultparametervalues">Default Parameter Values</h2>
+
+<p>Swift functions can have default parameter values. This is done by assigning a parameter value after the type.</p>
+
+<pre><code class="language-swift">func show(animated: Bool = true){  
+    if (animated){
+        //Animation Code
+    }
+} 
+</code></pre>
+
+<p>The best piece is you can omit parameters with default values in function call. Cool.</p>
+
+<pre><code class="language-swift">show() //Same as show(true)  
+</code></pre>
+
+<p>if you want to call the function with non-default value.</p>
+
+<pre><code class="language-swift">show(false)  
+</code></pre>
+
+<p>When it comes to multi parameter functions. <br>
+For example:</p>
+
+<pre><code class="language-swift">func start(airConditionOn: Bool = true,lightsOn: Bool = false, headLightsOn: Bool, playMusic: Bool, wiserSpeed: Int = 0){
+
+}
+</code></pre>
+
+<p>you can call this method in many possible ways. Many face functions. 👻</p>
+
+<pre><code class="language-swift">start(headLightsOn: false, playMusic: false)  
+start(lightsOn: false, headLightsOn: true, playMusic: true, wiserSpeed: 3)  
+start(false, headLightsOn: true, playMusic: false, wiserSpeed: 2)  
+</code></pre>
+
+<p>As you can see this can be confusing sometimes. Apple documentation has recommendation to make this less clutter. </p>
+
+<blockquote>
+  <p>Place parameters with default values at the end of a function’s parameter list. This ensures that all calls to the function use the same order for their nondefault arguments, and makes it clear that the same function is being called in each case.</p>
+</blockquote>
+
+<p>i.e</p>
+
+<p>Bring to 2 parameters <strong><code>playMusic</code></strong> and <strong><code>headLightsOn</code></strong> to the front. Because they have to be provided anyway. </p>
+
+<pre><code class="language-swift">func start(playMusic: Bool, headLightsOn: Bool,airConditionOn: Bool = true,lightsOn: Bool = false, wiserSpeed: Int = 0){
+
+}
+</code></pre>]]></content:encoded></item><item><title><![CDATA[Some questions about Enums . ??]]></title><description><![CDATA[<p>Check weather you digest the reasons for following enumerations become valid or invalid.</p>
 
 <script src="https://gist.github.com/madnik/143e19f4509772ae418f.js"></script>]]></description><link>https://swift.madnik.space/power-of-enums-in-swift-think/</link><guid isPermaLink="false">aa24ea64-6e2f-4d0a-9b16-c4321e315ff8</guid><dc:creator><![CDATA[Madushan]]></dc:creator><pubDate>Sun, 26 Jun 2016 09:20:13 GMT</pubDate><content:encoded><![CDATA[<p>Check weather you digest the reasons for following enumerations become valid or invalid.</p>
 
