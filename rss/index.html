@@ -1,4 +1,45 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="https://purl.org/dc/elements/1.1/" xmlns:content="https://purl.org/rss/1.0/modules/content/" xmlns:atom="https://www.w3.org/2005/Atom" version="2.0" xmlns:media="https://search.yahoo.com/mrss/"><channel><title><![CDATA[Swift - The Programming Language]]></title><description><![CDATA[Swift - The Programming Language]]></description><link>https://swift.madnik.space/</link><generator>Ghost 0.8</generator><lastBuildDate>Wed, 29 Jun 2016 01:39:57 GMT</lastBuildDate><atom:link href="https://swift.madnik.space/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[I'm Swift function. I have many faces - Default parameter values]]></title><description><![CDATA[<h2 id="defaultparametervalues">Default Parameter Values</h2>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="https://purl.org/dc/elements/1.1/" xmlns:content="https://purl.org/rss/1.0/modules/content/" xmlns:atom="https://www.w3.org/2005/Atom" version="2.0" xmlns:media="https://search.yahoo.com/mrss/"><channel><title><![CDATA[Swift - The Programming Language]]></title><description><![CDATA[Swift - The Programming Language]]></description><link>https://swift.madnik.space/</link><generator>Ghost 0.8</generator><lastBuildDate>Wed, 29 Jun 2016 14:11:25 GMT</lastBuildDate><atom:link href="https://swift.madnik.space/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Protocol Extensions to Rescue - reuseIdentifier]]></title><description><![CDATA[<p>This post is one of the chain posts that discuss the use cases of swift protocol extensions. </p>
+
+<p>Recently <a href="https://twitter.com/natashatherobot">natashatherobot</a> discussed this topic in one of her <a href="https://realm.io/news/appbuilders-natasha-muraschev-practical-protocol-oriented-programming/">talk</a>. </p>
+
+<p>reuseIdentifier - not a new term for iOS developers. We always meet this at <code>UITableViewCell</code>. reuseIdentifier is part of the cell reusing mechanism</p>]]></description><link>https://swift.madnik.space/protocol-extensions-to-rescue-reuseidentifier/</link><guid isPermaLink="false">ac1eb75c-7aaf-4324-94a5-f0f861cd8467</guid><dc:creator><![CDATA[Madushan]]></dc:creator><pubDate>Wed, 29 Jun 2016 14:11:06 GMT</pubDate><content:encoded><![CDATA[<p>This post is one of the chain posts that discuss the use cases of swift protocol extensions. </p>
+
+<p>Recently <a href="https://twitter.com/natashatherobot">natashatherobot</a> discussed this topic in one of her <a href="https://realm.io/news/appbuilders-natasha-muraschev-practical-protocol-oriented-programming/">talk</a>. </p>
+
+<p>reuseIdentifier - not a new term for iOS developers. We always meet this at <code>UITableViewCell</code>. reuseIdentifier is part of the cell reusing mechanism of UIKit. We give a cell a identifier that can be used to fetch a used cell instance again to reuse with new cell. This is a String typically the name of the subclass of <code>UITableViewCell</code></p>
+
+<h4 id="useprotocolextensiontogiveadefaultimplementationofreuseidentifer">Use protocol extension to give a default implementation of reuseIdentifer.</h4>
+
+<pre><code class="language-swift">protocol ReusableView: class{}
+
+extension ReusableView where Self: UIView{  
+    static var reuseIdentifier: String{
+        return String(self)
+    }
+}
+</code></pre>
+
+<p>How cool is that. Let me explain.</p>
+
+<h5 id="reusableviewclass"><code>ReusableView: class</code></h5>
+
+<p>This means the protocol ReusableView is class only protocol. Remember,By default Swift protocol can be implemented by structures and enumerations as well. You can limit a protocol to be implemented by class type only using this.</p>
+
+<h5 id="whereself"><code>where Self:</code></h5>
+
+<p>Self is determined at compile-time, not runtime and represent the class that implement <code>ReusableView</code> protocol.</p>
+
+<h5 id="stringself"><code>String(self)</code></h5>
+
+<p>This is swift equivalent of NSStringFromClass. Get the String value of class name.</p>
+
+<p>We solved it once and for all. </p>
+
+<pre><code class="language-swift">class MyTableCell: UITableViewCell,ReusableView{  
+}
+
+MyTableViewCell.reuseIdentifer //"MyTableCell"  
+</code></pre>]]></content:encoded></item><item><title><![CDATA[I'm Swift function. I have many faces - Default parameter values]]></title><description><![CDATA[<h2 id="defaultparametervalues">Default Parameter Values</h2>
 
 <p>Swift functions can have default parameter values. This is done by assigning a parameter value after the type.</p>
 
