@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 
-<!-- Mirrored from localhost:2368/protocol-extensions-to-rescue-reuseidentifier/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 21 Jul 2016 11:19:14 GMT -->
+<!-- Mirrored from localhost:2368/thinktank-01-2/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 21 Jul 2016 11:19:13 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <title>Protocol Extensions to Rescue - reuseIdentifier</title>
+    <title>ThinkTank 01</title>
     <meta name="description" content="" />
 
     <meta name="HandheldFriendly" content="True" />
@@ -24,14 +24,14 @@
     
     <meta property="og:site_name" content="Swift - The Programming Language" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="Protocol Extensions to Rescue - reuseIdentifier" />
-    <meta property="og:description" content="This post is one of the chain posts that discuss the use cases of swift protocol extensions.  Recently natashatherobot discussed this topic in one of her talk.  reuseIdentifier - not a new term for iOS developers. We always meet this at UITableViewCell. reuseIdentifier is part of the cell reusing mechanism" />
+    <meta property="og:title" content="ThinkTank 01" />
+    <meta property="og:description" content="Simple yet important facts about swift in the form of questions. First One. Why the compile error? class A{ } class B: A{       var i: Int     //Compile Error: Overriding declaration requires an &#x27;override&#x27; keyword     init() {         i &#x3D; 4     } } How come init() becomes an Overriding declaration? Because   Swift provides default initializer for any" />
     <meta property="og:url" content="index.html" />
-    <meta property="article:published_time" content="2016-06-29T14:11:06.194Z" />
-    <meta property="article:modified_time" content="2016-06-29T14:11:06.193Z" />
+    <meta property="article:published_time" content="2016-07-21T11:16:35.344Z" />
+    <meta property="article:modified_time" content="2016-07-21T11:16:35.343Z" />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Protocol Extensions to Rescue - reuseIdentifier" />
-    <meta name="twitter:description" content="This post is one of the chain posts that discuss the use cases of swift protocol extensions.  Recently natashatherobot discussed this topic in one of her talk.  reuseIdentifier - not a new term for iOS developers. We always meet this at UITableViewCell. reuseIdentifier is part of the cell reusing mechanism" />
+    <meta name="twitter:title" content="ThinkTank 01" />
+    <meta name="twitter:description" content="Simple yet important facts about swift in the form of questions. First One. Why the compile error? class A{ } class B: A{       var i: Int     //Compile Error: Overriding declaration requires an &#x27;override&#x27; keyword     init() {         i &#x3D; 4     } } How come init() becomes an Overriding declaration? Because   Swift provides default initializer for any" />
     <meta name="twitter:url" content="index.html" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="Madushan" />
@@ -51,11 +51,11 @@
         "url": "https://swift.madnik.space/author/madushan/",
         "sameAs": []
     },
-    "headline": "Protocol Extensions to Rescue - reuseIdentifier",
-    "url": "https://swift.madnik.space/protocol-extensions-to-rescue-reuseidentifier/",
-    "datePublished": "2016-06-29T14:11:06.194Z",
-    "dateModified": "2016-06-29T14:11:06.193Z",
-    "description": "This post is one of the chain posts that discuss the use cases of swift protocol extensions.  Recently natashatherobot discussed this topic in one of her talk.  reuseIdentifier - not a new term for iOS developers. We always meet this at UITableViewCell. reuseIdentifier is part of the cell reusing mechanism"
+    "headline": "ThinkTank 01",
+    "url": "https://swift.madnik.space/thinktank-01-2/",
+    "datePublished": "2016-07-21T11:16:35.344Z",
+    "dateModified": "2016-07-21T11:16:35.343Z",
+    "description": "Simple yet important facts about swift in the form of questions. First One. Why the compile error? class A{ } class B: A{       var i: Int     //Compile Error: Overriding declaration requires an &#x27;override&#x27; keyword     init() {         i &#x3D; 4     } } How come init() becomes an Overriding declaration? Because   Swift provides default initializer for any"
 }
     </script>
 
@@ -103,51 +103,117 @@
     <article class="post">
 
         <header class="post-header">
-            <h1 class="post-title">Protocol Extensions to Rescue - reuseIdentifier</h1>
+            <h1 class="post-title">ThinkTank 01</h1>
             <section class="post-meta">
-                <time class="post-date" datetime="2016-06-29">29 June 2016</time> 
+                <time class="post-date" datetime="2016-07-21">21 July 2016</time> 
             </section>
         </header>
 
         <section class="post-content">
-            <p>This post is one of the chain posts that discuss the use cases of swift protocol extensions. </p>
+            <h2 id="simpleyetimportantfactsaboutswiftintheformofquestions">Simple yet important facts about swift in the form of questions.</h2>
 
-<p>Recently <a href="https://twitter.com/natashatherobot">natashatherobot</a> discussed this topic in one of her <a href="https://realm.io/news/appbuilders-natasha-muraschev-practical-protocol-oriented-programming/">talk</a>. </p>
+<h4 id="firstonewhythecompileerror">First One. Why the compile error?</h4>
 
-<p>reuseIdentifier - not a new term for iOS developers. We always meet this at <code>UITableViewCell</code>. reuseIdentifier is part of the cell reusing mechanism of UIKit. We give a cell a identifier that can be used to fetch a used cell instance again to reuse with new cell. This is a String typically the name of the subclass of <code>UITableViewCell</code></p>
+<pre><code class="language-swift">class A{
 
-<h4 id="useprotocolextensiontogiveadefaultimplementationofreuseidentifer">Use protocol extension to give a default implementation of reuseIdentifer.</h4>
+}
 
-<pre><code class="language-swift">protocol ReusableView: class{}
+class B: A{  
+    var i: Int
 
-extension ReusableView where Self: UIView{  
-    static var reuseIdentifier: String{
-        return String(self)
+    //Compile Error: Overriding declaration requires an 'override' keyword
+    init() {
+        i = 4
     }
 }
 </code></pre>
 
-<p>How cool is that. Let me explain.</p>
+<p>How come <code>init()</code> becomes an Overriding declaration?</p>
 
-<h5 id="reusableviewclass"><code>ReusableView: class</code></h5>
+<h4 id="because">Because</h4>
 
-<p>This means the protocol ReusableView is class only protocol. Remember,By default Swift protocol can be implemented by structures and enumerations as well. You can limit a protocol to be implemented by class type only using this.</p>
+<blockquote>
+  <p>Swift provides default initializer for any class or structure that provides initail values for all of its properties and that does not provide at least one initializer itself.</p>
+</blockquote>
 
-<h5 id="whereself"><code>where Self:</code></h5>
+<p>The class <code>A</code> has no stored properties. So we can simply assume all properties are initialized. It doesn't provide a initializer either. So it qualifies for a default initializer. Indeed there is one. In the form of <code>init()</code>.</p>
 
-<p>Self is determined at compile-time, not runtime and represent the class that implement <code>ReusableView</code> protocol.</p>
+<p>So the correct syntax for class <code>B</code> should be.</p>
 
-<h5 id="stringself"><code>String(self)</code></h5>
+<pre><code class="language-swift">class B: A{  
+    var i: Int    
 
-<p>This is swift equivalent of NSStringFromClass. Get the String value of class name.</p>
-
-<p>We solved it once and for all. </p>
-
-<pre><code class="language-swift">class MyTableCell: UITableViewCell,ReusableView{  
+    override init() {
+        i = 4
+    }
 }
-
-MyTableViewCell.reuseIdentifer //"MyTableCell"  
 </code></pre>
+
+<p>What if class <code>A</code> does have an initializer.</p>
+
+<pre><code class="language-swift">class A{  
+    var j: Int
+    init(j: Int){
+        self.j = j
+    }
+}
+</code></pre>
+
+<p>In this case class <code>A</code> doesn't receive a default initializer. </p>
+
+<p>class <code>B</code> initializer should omit <code>override</code> keyword.  </p>
+
+<pre><code class="language-swift">class B: A{  
+    var i: Int
+
+    init() {
+        i = 4
+        super.init(j: 5)
+    }
+}
+</code></pre>
+
+<h4 id="secondoneisthisvalid">Second One. Is this valid?</h4>
+
+<p>If we declare class <code>B</code> as follows. Is it valid?</p>
+
+<pre><code class="language-swift">class B: A{  
+    var i: Int
+
+    init() {
+        self.i = 4
+        self.j = 9
+        super.init(j: 5)
+
+    }
+}
+</code></pre>
+
+<p>The answer is.</p>
+
+<p>.</p>
+
+<p>.</p>
+
+<p>.</p>
+
+<p>.</p>
+
+<h4 id="no">No.</h4>
+
+<p>The compiler screams.  </p>
+
+<blockquote>
+  <p>Use of self in property access <code>j</code> before <code>super.init</code> initializes self.</p>
+</blockquote>
+
+<p>The reason is part of swift two-phase initialization process.</p>
+
+<p>Compiler safety check 2 is in action.</p>
+
+<h4 id="safetycheck2">Safety check 2</h4>
+
+<p>A designated initializer must delegate up to a superclass initializer before assigning a value to an inherited property. If it doesn’t, the new value the designated initializer assigns will be overwritten by the superclass as part of its own initialization.</p>
         </section>
 
         <footer class="post-footer">
@@ -167,15 +233,15 @@ MyTableViewCell.reuseIdentifer //"MyTableCell"
 
             <section class="share">
                 <h4>Share this post</h4>
-                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Protocol%20Extensions%20to%20Rescue%20-%20reuseIdentifier&amp;url=https://swift.madnik.space/protocol-extensions-to-rescue-reuseidentifier/"
+                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=ThinkTank%2001&amp;url=https://swift.madnik.space/thinktank-01-2/"
                     onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <span class="hidden">Twitter</span>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://swift.madnik.space/protocol-extensions-to-rescue-reuseidentifier/"
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://swift.madnik.space/thinktank-01-2/"
                     onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <span class="hidden">Facebook</span>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://swift.madnik.space/protocol-extensions-to-rescue-reuseidentifier/"
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://swift.madnik.space/thinktank-01-2/"
                    onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <span class="hidden">Google+</span>
                 </a>
@@ -188,16 +254,10 @@ MyTableViewCell.reuseIdentifer //"MyTableCell"
 </main>
 
 <aside class="read-next">
-    <a class="read-next-story no-cover" href="../indirect-enums-and-indirect-enum-cases-recursive-enum-enum-is-not-marked-as-indirect/index.html">
+    <a class="read-next-story prev no-cover" href="../indirect-enums-and-indirect-enum-cases-recursive-enum-enum-is-not-marked-as-indirect/index.html">
         <section class="post">
             <h2>Indirect Enums and Indirect Enum cases - Recursive enum Enum is not marked as indirect</h2>
             <p>Recursive enum AEnum is not marked as indirect Have encountered this error?  What is this indirect keyword. Why we&hellip;</p>
-        </section>
-    </a>
-    <a class="read-next-story prev no-cover" href="../im-swift-function-i-have-many-faces-2/index.html">
-        <section class="post">
-            <h2>I&#x27;m Swift function. I have many faces - Default parameter values</h2>
-            <p>Default Parameter Values Swift functions can have default parameter values. This is done by assigning a parameter value after&hellip;</p>
         </section>
     </a>
 </aside>
@@ -218,5 +278,5 @@ MyTableViewCell.reuseIdentifer //"MyTableCell"
     <script type="text/javascript" src="../assets/js/prism0ba4.js?v=46543ac229"></script>
 </body>
 
-<!-- Mirrored from localhost:2368/protocol-extensions-to-rescue-reuseidentifier/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 21 Jul 2016 11:19:14 GMT -->
+<!-- Mirrored from localhost:2368/thinktank-01-2/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 21 Jul 2016 11:19:13 GMT -->
 </html>

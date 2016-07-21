@@ -1,4 +1,207 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="https://purl.org/dc/elements/1.1/" xmlns:content="https://purl.org/rss/1.0/modules/content/" xmlns:atom="https://www.w3.org/2005/Atom" version="2.0" xmlns:media="https://search.yahoo.com/mrss/"><channel><title><![CDATA[Swift - The Programming Language]]></title><description><![CDATA[Swift - The Programming Language]]></description><link>https://swift.madnik.space/</link><generator>Ghost 0.8</generator><lastBuildDate>Wed, 29 Jun 2016 14:11:25 GMT</lastBuildDate><atom:link href="https://swift.madnik.space/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Protocol Extensions to Rescue - reuseIdentifier]]></title><description><![CDATA[<p>This post is one of the chain posts that discuss the use cases of swift protocol extensions. </p>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="https://purl.org/dc/elements/1.1/" xmlns:content="https://purl.org/rss/1.0/modules/content/" xmlns:atom="https://www.w3.org/2005/Atom" version="2.0" xmlns:media="https://search.yahoo.com/mrss/"><channel><title><![CDATA[Swift - The Programming Language]]></title><description><![CDATA[Swift - The Programming Language]]></description><link>https://swift.madnik.space/</link><generator>Ghost 0.8</generator><lastBuildDate>Thu, 21 Jul 2016 11:19:10 GMT</lastBuildDate><atom:link href="https://swift.madnik.space/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[ThinkTank 01]]></title><description><![CDATA[<h2 id="simpleyetimportantfactsaboutswiftintheformofquestions">Simple yet important facts about swift in the form of questions.</h2>
+
+<h4 id="firstonewhythecompileerror">First One. Why the compile error?</h4>
+
+<pre><code class="language-swift">class A{
+
+}
+
+class B: A{  
+    var i: Int
+
+    //Compile Error: Overriding declaration requires an 'override' keyword
+    init() {
+        i = 4
+    }
+}
+</code></pre>
+
+<p>How come <code>init()</code> becomes an Overriding declaration?</p>
+
+<h4 id="because">Because</h4>
+
+<blockquote>
+  <p>Swift provides default initializer for any</p></blockquote>]]></description><link>https://swift.madnik.space/thinktank-01-2/</link><guid isPermaLink="false">56092533-46ad-46c7-b1d2-a8dd6c57e35a</guid><dc:creator><![CDATA[Madushan]]></dc:creator><pubDate>Thu, 21 Jul 2016 11:16:35 GMT</pubDate><content:encoded><![CDATA[<h2 id="simpleyetimportantfactsaboutswiftintheformofquestions">Simple yet important facts about swift in the form of questions.</h2>
+
+<h4 id="firstonewhythecompileerror">First One. Why the compile error?</h4>
+
+<pre><code class="language-swift">class A{
+
+}
+
+class B: A{  
+    var i: Int
+
+    //Compile Error: Overriding declaration requires an 'override' keyword
+    init() {
+        i = 4
+    }
+}
+</code></pre>
+
+<p>How come <code>init()</code> becomes an Overriding declaration?</p>
+
+<h4 id="because">Because</h4>
+
+<blockquote>
+  <p>Swift provides default initializer for any class or structure that provides initail values for all of its properties and that does not provide at least one initializer itself.</p>
+</blockquote>
+
+<p>The class <code>A</code> has no stored properties. So we can simply assume all properties are initialized. It doesn't provide a initializer either. So it qualifies for a default initializer. Indeed there is one. In the form of <code>init()</code>.</p>
+
+<p>So the correct syntax for class <code>B</code> should be.</p>
+
+<pre><code class="language-swift">class B: A{  
+    var i: Int    
+
+    override init() {
+        i = 4
+    }
+}
+</code></pre>
+
+<p>What if class <code>A</code> does have an initializer.</p>
+
+<pre><code class="language-swift">class A{  
+    var j: Int
+    init(j: Int){
+        self.j = j
+    }
+}
+</code></pre>
+
+<p>In this case class <code>A</code> doesn't receive a default initializer. </p>
+
+<p>class <code>B</code> initializer should omit <code>override</code> keyword.  </p>
+
+<pre><code class="language-swift">class B: A{  
+    var i: Int
+
+    init() {
+        i = 4
+        super.init(j: 5)
+    }
+}
+</code></pre>
+
+<h4 id="secondoneisthisvalid">Second One. Is this valid?</h4>
+
+<p>If we declare class <code>B</code> as follows. Is it valid?</p>
+
+<pre><code class="language-swift">class B: A{  
+    var i: Int
+
+    init() {
+        self.i = 4
+        self.j = 9
+        super.init(j: 5)
+
+    }
+}
+</code></pre>
+
+<p>The answer is.</p>
+
+<p>.</p>
+
+<p>.</p>
+
+<p>.</p>
+
+<p>.</p>
+
+<h4 id="no">No.</h4>
+
+<p>The compiler screams.  </p>
+
+<blockquote>
+  <p>Use of self in property access <code>j</code> before <code>super.init</code> initializes self.</p>
+</blockquote>
+
+<p>The reason is part of swift two-phase initialization process.</p>
+
+<p>Compiler safety check 2 is in action.</p>
+
+<h4 id="safetycheck2">Safety check 2</h4>
+
+<p>A designated initializer must delegate up to a superclass initializer before assigning a value to an inherited property. If it doesn’t, the new value the designated initializer assigns will be overwritten by the superclass as part of its own initialization.</p>]]></content:encoded></item><item><title><![CDATA[Indirect Enums and Indirect Enum cases - Recursive enum Enum is not marked as indirect]]></title><description><![CDATA[<blockquote>
+  <p>Recursive enum <code>AEnum</code> is not marked as <code>indirect</code></p>
+</blockquote>
+
+<p>Have encountered this error? <br>
+What is this <code>indirect</code> keyword. Why we need it.</p>
+
+<p>indirection of Enums introduced in Swift 2 in order to solve major problem when a Enum needed to be recursive.</p>
+
+<h3 id="theproblem">The Problem</h3>
+
+<p>Consider the following Enum definition. A very</p>]]></description><link>https://swift.madnik.space/indirect-enums-and-indirect-enum-cases-recursive-enum-enum-is-not-marked-as-indirect/</link><guid isPermaLink="false">acf8676c-73d9-4412-898d-17836b2b9d3e</guid><dc:creator><![CDATA[Madushan]]></dc:creator><pubDate>Mon, 04 Jul 2016 09:37:14 GMT</pubDate><content:encoded><![CDATA[<blockquote>
+  <p>Recursive enum <code>AEnum</code> is not marked as <code>indirect</code></p>
+</blockquote>
+
+<p>Have encountered this error? <br>
+What is this <code>indirect</code> keyword. Why we need it.</p>
+
+<p>indirection of Enums introduced in Swift 2 in order to solve major problem when a Enum needed to be recursive.</p>
+
+<h3 id="theproblem">The Problem</h3>
+
+<p>Consider the following Enum definition. A very same example used to introduce indirection at apple presentation.</p>
+
+<pre><code class="language-swift">enum Tree&lt;T&gt; {  
+  case Leaf(T)
+  case Node(Tree, Tree) 
+}
+</code></pre>
+
+<p>Swift Enum is a value types. So the associated values in an enum stored inline. This can make the above <code>Tree</code> enum (A recursive enum as you can see) can possibly take infinite size.</p>
+
+<h3 id="solution">Solution</h3>
+
+<p>Lets look at the possible workaround used before they introduced Swift 2.0.  </p>
+
+<h4 id="01priortoindirect">01 Prior to <code>indirect</code></h4>
+
+<pre><code class="language-swift">final class Box&lt;T&gt; {  
+    let unbox: T
+    init(_ x: T) { self.unbox = x }
+}
+
+enum Tree&lt;T&gt;{  
+    case Leaf(Box&lt;Tree&lt;T&gt;&gt;)
+    case Node(Box&lt;Tree&lt;T&gt;&gt;,Box&lt;Tree&lt;T&gt;&gt;)
+}
+</code></pre>
+
+<p>Now. We have made the associated values a reference type indirectly.</p>
+
+<p>However this solution is ugly and this breaks the great pattern matching of Enum.</p>
+
+<h4 id="02useindirect">02 Use <code>indirect</code></h4>
+
+<p>Swift 2 made this painless. No more boxing.</p>
+
+<pre><code class="language-swift">enum Tree&lt;T&gt; {  
+    indirect case Leaf(T)
+    indirect case Node(Tree, Tree)
+}
+</code></pre>
+
+<p>Or you can mark the entire enum as <code>indirect</code> which simply ask compiler to use indirection wherever applicable.</p>
+
+<pre><code class="language-swift">indirect enum Tree&lt;T&gt; {  
+   case Leaf(T)
+   case Node(Tree, Tree)
+}
+</code></pre>
+
+<p>This is great addition to enum which make the algebraic data type lot more powerful.</p>
+
+<blockquote>
+  <p>Think? Why doesn't the compiler infer the indirection for us automatically.</p>
+</blockquote>
+
+<p>Here is <a href="https://lists.swift.org/pipermail/swift-dev/Week-of-Mon-20151207/000259.html">some discussion</a> on why?</p>]]></content:encoded></item><item><title><![CDATA[Protocol Extensions to Rescue - reuseIdentifier]]></title><description><![CDATA[<p>This post is one of the chain posts that discuss the use cases of swift protocol extensions. </p>
 
 <p>Recently <a href="https://twitter.com/natashatherobot">natashatherobot</a> discussed this topic in one of her <a href="https://realm.io/news/appbuilders-natasha-muraschev-practical-protocol-oriented-programming/">talk</a>. </p>
 
