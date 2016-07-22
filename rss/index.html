@@ -1,4 +1,122 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="https://purl.org/dc/elements/1.1/" xmlns:content="https://purl.org/rss/1.0/modules/content/" xmlns:atom="https://www.w3.org/2005/Atom" version="2.0" xmlns:media="https://search.yahoo.com/mrss/"><channel><title><![CDATA[Swift - The Programming Language]]></title><description><![CDATA[Swift - The Programming Language]]></description><link>https://swift.madnik.space/</link><generator>Ghost 0.8</generator><lastBuildDate>Thu, 21 Jul 2016 11:19:10 GMT</lastBuildDate><atom:link href="https://swift.madnik.space/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[ThinkTank 01]]></title><description><![CDATA[<h2 id="simpleyetimportantfactsaboutswiftintheformofquestions">Simple yet important facts about swift in the form of questions.</h2>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="https://purl.org/dc/elements/1.1/" xmlns:content="https://purl.org/rss/1.0/modules/content/" xmlns:atom="https://www.w3.org/2005/Atom" version="2.0" xmlns:media="https://search.yahoo.com/mrss/"><channel><title><![CDATA[Swift - The Programming Language]]></title><description><![CDATA[Swift - The Programming Language]]></description><link>https://swift.madnik.space/</link><generator>Ghost 0.8</generator><lastBuildDate>Fri, 22 Jul 2016 06:51:57 GMT</lastBuildDate><atom:link href="https://swift.madnik.space/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Algorithms - Merge Sort and Quick Sort in swift]]></title><description><![CDATA[<p>Quick sort and Merge sort both are divide and conquer algorithms</p>
+
+<h3 id="divideandconquer">Divide and Conquer</h3>
+
+<p>Divide and Conquer is a algorithm paradigm based on recursion. </p>
+
+<h5 id="divide">Divide</h5>
+
+<p>Break the problem into sub problems that are similar to original problem. Then solve subproblems recursively.</p>
+
+<h5 id="conquer">Conquer</h5>
+
+<p>Finally combine the solutions to subproblems to solve</p>]]></description><link>https://swift.madnik.space/algorithms-merge-sort-and-quick-sort-in-swift/</link><guid isPermaLink="false">15ef3c25-1ca2-4295-b3aa-47d631bf4d8c</guid><dc:creator><![CDATA[Madushan]]></dc:creator><pubDate>Fri, 22 Jul 2016 06:51:37 GMT</pubDate><content:encoded><![CDATA[<p>Quick sort and Merge sort both are divide and conquer algorithms</p>
+
+<h3 id="divideandconquer">Divide and Conquer</h3>
+
+<p>Divide and Conquer is a algorithm paradigm based on recursion. </p>
+
+<h5 id="divide">Divide</h5>
+
+<p>Break the problem into sub problems that are similar to original problem. Then solve subproblems recursively.</p>
+
+<h5 id="conquer">Conquer</h5>
+
+<p>Finally combine the solutions to subproblems to solve the original problem.</p>
+
+<hr>
+
+<h3 id="mergesort">Merge Sort</h3>
+
+<p>If you want a sound explanation about the algorithm please refer. <br>
+<a href="https://www.khanacademy.org/computing/computer-science/algorithms/merge-sort/a/overview-of-merge-sort">In detail explanation by khan Academy</a></p>
+
+<pre><code class="language-swift">func mergeSort&lt;T: Comparable&gt;(inout array:[T],p: Int, r: Int) -&gt; [T]{
+
+    var p = p
+
+    guard r &gt; p else{
+        return array
+    }
+
+    var q = p + (r-p)/2
+
+    mergeSort(&amp;array, p: p, r: q)
+    mergeSort(&amp;array, p: q+1, r: r)
+
+    //Now merge.
+    while q &lt; r &amp;&amp; p &lt;= q {
+
+        if array[p] &gt; array[q+1]{
+            array.insert(array.removeAtIndex(q+1), atIndex: p)
+            if q &lt; r { q+=1 }
+        }
+        if p &lt;= q { p += 1 }
+    }
+
+    return array
+}
+</code></pre>
+
+<hr>
+
+<h3 id="quicksort">Quick Sort</h3>
+
+<p>Again for detail explanation please refer. <br>
+<a href="https://www.khanacademy.org/computing/computer-science/algorithms/quick-sort/a/overview-of-quicksort">Quick Sort explanation by Khan Academy</a></p>
+
+<p>Quick sort can be implemented very easily using swift filter.  </p>
+
+<pre><code class="language-swift">func quickSortEasy&lt;T where T:Comparable&gt;(array: [T]) -&gt; [T]{  
+    guard array.count &gt; 1 else{
+        return array
+    }
+
+    let pivot = array[array.count/2]
+
+    let lessThanPivot = array.filter{ $0 &lt; pivot }
+    let equalToPivot = array.filter{ $0 == pivot }
+    let greaterThanPivot = array.filter{ $0 &gt; pivot }
+
+    return quickSortEasy(lessThanPivot) + equalToPivot + quickSortEasy(greaterThanPivot)
+}
+</code></pre>
+
+<p>But this is not the best way to do it. It create intermediate arrays within sub problems.</p>
+
+<p>We can do better than this.</p>
+
+<pre><code class="language-swift">func quickSort&lt;T where T:Comparable&gt;(inout array: [T],p: Int,r: Int) -&gt; [T]{
+
+    guard array[p...r].count &gt; 1 else{
+        return array
+    }
+
+    func partition&lt;T where T:Comparable&gt;(inout array: [T],pivotIndex: Int) -&gt; Int{
+        var q = p
+        var i = p
+
+        let pivot = array[pivotIndex]
+
+        while i &lt; r{
+            if array[i] &lt; pivot {
+                array.insert(array.removeAtIndex(i), atIndex: q)
+                q += 1
+            }
+
+            i += 1
+        }
+        array.insert(array.removeAtIndex(pivotIndex), atIndex: q)
+        return q
+    }
+
+    let q = partition(&amp;array, pivotIndex: r)
+    if p &lt; q-1 { quickSort(&amp;array, p: p, r: q-1) }
+    if q+1 &lt; r { quickSort(&amp;array, p: q+1, r: r) }
+
+    return array
+}
+</code></pre>]]></content:encoded></item><item><title><![CDATA[ThinkTank 01]]></title><description><![CDATA[<h2 id="simpleyetimportantfactsaboutswiftintheformofquestions">Simple yet important facts about swift in the form of questions.</h2>
 
 <h4 id="firstonewhythecompileerror">First One. Why the compile error?</h4>
 
@@ -84,6 +202,8 @@ class B: A{
 }
 </code></pre>
 
+<hr>
+
 <h4 id="secondoneisthisvalid">Second One. Is this valid?</h4>
 
 <p>If we declare class <code>B</code> as follows. Is it valid?</p>
@@ -124,7 +244,20 @@ class B: A{
 
 <h4 id="safetycheck2">Safety check 2</h4>
 
-<p>A designated initializer must delegate up to a superclass initializer before assigning a value to an inherited property. If it doesn’t, the new value the designated initializer assigns will be overwritten by the superclass as part of its own initialization.</p>]]></content:encoded></item><item><title><![CDATA[Indirect Enums and Indirect Enum cases - Recursive enum Enum is not marked as indirect]]></title><description><![CDATA[<blockquote>
+<p>A designated initializer must delegate up to a superclass initializer before assigning a value to an inherited property. If it doesn’t, the new value the designated initializer assigns will be overwritten by the superclass as part of its own initialization.</p>
+
+<p>So the correct declaration should be.</p>
+
+<pre><code class="language-swift">class B: A{  
+    var i: Int
+
+    init() {
+        self.i = 4
+        super.init(j: 5)
+        self.j = 9
+    }
+}
+</code></pre>]]></content:encoded></item><item><title><![CDATA[Indirect Enums and Indirect Enum cases - Recursive enum Enum is not marked as indirect]]></title><description><![CDATA[<blockquote>
   <p>Recursive enum <code>AEnum</code> is not marked as <code>indirect</code></p>
 </blockquote>
 
